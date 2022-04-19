@@ -1,7 +1,7 @@
 from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
 
-my_engine = create_engine('sqlite:///conflict_management/qestions.db')
+my_engine = create_engine('sqlite:///conflict_management/qeustions.db')
 Base = declarative_base()
 
 class DataBase(Base):
