@@ -25,12 +25,12 @@ def gender_selection():
    return reciverd_gender
 
 class SavingData():
-      
+
    def submit_demografic_data(self, event):
       recived_age = enter_age.get()
       self.passing_data = DataCollectionToPassInDB(gender_value = gender_selection(), age_velue = recived_age)
       self.answer_dict()
-         
+
    def answer_dict(self): 
       self.var_answer_selection = {}
       self.read_all_questions = self.passing_data.read_all_questions()
@@ -47,16 +47,16 @@ class SavingData():
          one_question_at_a_time = Label (questions_window, text=f'{question.id} {question}')
          one_question_at_a_time.grid(row=new_row, column=1, columnspan= 1, sticky= W)
          
-         option_1 = Radiobutton(questions_window, text= "Rarely", variable= self.var_answer_selection[question.id], value=1) #command= self.get_answer)
-         option_2 = Radiobutton(questions_window, text= "Sometimes", variable=self.var_answer_selection[question.id], value=2) #command= self.get_answer)
-         option_3 = Radiobutton(questions_window, text= "Often", variable=self.var_answer_selection[question.id], value=3) #command= self.get_answer)
-         option_4 = Radiobutton(questions_window, text= "Always", variable=self.var_answer_selection[question.id], value=4) #command= self.get_answer)
+         option_1 = Radiobutton(questions_window, text= "Rarely", variable= self.var_answer_selection[question.id], value=1) 
+         option_2 = Radiobutton(questions_window, text= "Sometimes", variable=self.var_answer_selection[question.id], value=2) 
+         option_3 = Radiobutton(questions_window, text= "Often", variable=self.var_answer_selection[question.id], value=3) 
+         option_4 = Radiobutton(questions_window, text= "Always", variable=self.var_answer_selection[question.id], value=4)
          
          option_1.grid(row=new_row,column=2)
          option_2.grid(row=new_row,column=3)
          option_3.grid(row=new_row,column=4)
          option_4.grid(row=new_row,column=5)
-      
+
       submit_answers = Button (questions_window, text = "Submit answers")
       submit_answers.bind("<Button-1>", respondent.result_printings)
       submit_answers.grid(row=20, column=3)
@@ -64,11 +64,6 @@ class SavingData():
    def get_answer(self):
       for question in self.read_all_questions:
          pass_new_answer_line = self.passing_data.save_answers(respondent_id_recived = self.passing_data.read_last_respondent(), question_id_recived = question.id, answer_recived = self.var_answer_selection[question.id].get())
-
-         # answer_list.apend(self.var_answer_selection[question.id].get())
-      # print( self.var_answer_selection[1].get(), self.var_answer_selection[8].get())
-      pass 
-
    
    def result_cauculation(self):
       self.collaborating = self.var_answer_selection[1].get() + self.var_answer_selection[5].get() + self.var_answer_selection[7].get()
@@ -77,7 +72,10 @@ class SavingData():
       self.accommodating = self.var_answer_selection[3].get() + self.var_answer_selection[11].get() + self.var_answer_selection[14].get()
       self.compromising = self.var_answer_selection[2].get() + self.var_answer_selection[8].get() + self.var_answer_selection[13].get()
       # self.get_answer()
-   
+
+   def test(self):
+      print(self.passing_data.read_last_respondent())
+
    def result_printings(self, event):
       self.result_cauculation()
       result_window = Toplevel(main_window)
