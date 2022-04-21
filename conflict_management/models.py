@@ -21,14 +21,14 @@ class RespondentDabaBase(Base):
     gender = Column("Gender", String, nullable = True)
     age = Column("Age", Integer, nullable = True)
 
-    # def __repr__(self):
-    #     return self.id
+    def __repr__(self):
+        return self.id
 
 class AnswersDataBase(Base):
     __tablename__ = "Answers"
     id = Column(Integer, primary_key = True, autoincrement = True)
     respondent_id = Column(Integer, ForeignKey('Respondent.id'))
-    qestion_id = Column(Integer, ForeignKey('Questions.id'))
+    question_id = Column(Integer, ForeignKey('Questions.id'))
     answer = Column("Answer", Integer)
 
 Base.metadata.create_all(my_engine)
