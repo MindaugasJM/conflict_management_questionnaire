@@ -29,6 +29,7 @@ class SavingData():
    def submit_demografic_data(self, event):
       recived_age = enter_age.get()
       self.passing_data = DataCollectionToPassInDB(gender_value = gender_selection(), age_velue = recived_age)
+      print(self.passing_data.new_respondent_id)
       self.answer_dict()
 
    def answer_dict(self): 
@@ -52,10 +53,10 @@ class SavingData():
          option_3 = Radiobutton(questions_window, text= "Often", variable=self.var_answer_selection[question.id], value=3) 
          option_4 = Radiobutton(questions_window, text= "Always", variable=self.var_answer_selection[question.id], value=4)
          
-         option_1.grid(row=new_row,column=2)
-         option_2.grid(row=new_row,column=3)
-         option_3.grid(row=new_row,column=4)
-         option_4.grid(row=new_row,column=5)
+         option_1.grid(row=new_row, column=2)
+         option_2.grid(row=new_row, column=3)
+         option_3.grid(row=new_row, column=4)
+         option_4.grid(row=new_row, column=5)
 
       submit_answers = Button (questions_window, text = "Submit answers")
       submit_answers.bind("<Button-1>", respondent.result_printings)
@@ -63,7 +64,7 @@ class SavingData():
 
    def get_answer(self):
       for question in self.read_all_questions:
-         pass_new_answer_line = self.passing_data.save_answers(respondent_id_recived = self.passing_data.read_last_respondent(), question_id_recived = question.id, answer_recived = self.var_answer_selection[question.id].get())
+         self.passing_data.save_answers(question_id_recived = question.id, answer_recived = self.var_answer_selection[question.id].get())
    
    def result_cauculation(self):
       self.collaborating = self.var_answer_selection[1].get() + self.var_answer_selection[5].get() + self.var_answer_selection[7].get()
@@ -71,7 +72,7 @@ class SavingData():
       self.avoiding = self.var_answer_selection[6].get() + self.var_answer_selection[10].get() + self.var_answer_selection[15].get()
       self.accommodating = self.var_answer_selection[3].get() + self.var_answer_selection[11].get() + self.var_answer_selection[14].get()
       self.compromising = self.var_answer_selection[2].get() + self.var_answer_selection[8].get() + self.var_answer_selection[13].get()
-      # self.get_answer()
+      self.get_answer()
 
    def test(self):
       print(self.passing_data.read_last_respondent())
@@ -96,8 +97,8 @@ submit_demografic_data_button.bind("<Button-1>", respondent.submit_demografic_da
 lable_age.grid(row=0, column=2, columnspan= 2, sticky=W)
 enter_age.grid(row=0, column=4, columnspan=2, sticky=W)
 lable_gender.grid(row=1, column=2, columnspan= 2, sticky=W)
-checkbutton_gender_male.grid(row=1,column=4)
+checkbutton_gender_male.grid(row=1, column=4)
 checkbutton_gender_female.grid(row=1, column=5)
-submit_demografic_data_button.grid(row=2, column=4, columnspan= 3)
+submit_demografic_data_button.grid(row=2, column=4, columnspan=3)
 
 main_window.mainloop()
