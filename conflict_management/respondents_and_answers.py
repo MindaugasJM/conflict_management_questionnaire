@@ -19,11 +19,11 @@ class DataCollectionToPassInDB():
       return all_questions
 
    def read_last_respondent(self):
-      respondent_id = session.query(RespondentDabaBase).all()
-      return respondent_id[-1]
+      respondent = session.query(RespondentDabaBase).order_by(RespondentDabaBase.id.desc).first()
+      return respondent.id
 
-   def save_answers(self, respondent_id_recived, question_id_recived, answer_recived):
-      new_answer_line = AnswersDataBase(respondent_id = respondent_id_recived, question_id = question_id_recived, answer = answer_recived)
+   def save_answers(self, question_id_recived, answer_recived):
+      new_answer_line = AnswersDataBase(respondent_id = self.new_respondent_id, question_id = question_id_recived, answer = answer_recived)
       session.add(new_answer_line)
       session.commit()
       
